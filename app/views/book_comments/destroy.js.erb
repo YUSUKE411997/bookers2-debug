@@ -1,0 +1,6 @@
+<!--$("#c_destroy").html("<%#= j(render 'book_comments/comment_destroy', book_comment: @book_comment) %>");-->
+
+$("#comments_area").html("<%= j(render 'comments', book: @book) %>");
+
+$("#count_comment").html("<%= j(render 'comment_count', book: @book) %>");
+
