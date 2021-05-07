@@ -12,6 +12,8 @@
 	  <th><%= link_to follows_user_path(user) do %>
 	    フォロー数：<%= user.followings.count %></th>
 	    <% end %>
+	</tr>
+	<tr>
     <th><%= link_to followers_user_path(user) do %>
       フォロワー数：<%= user.followers.count %></th>
       <% end %>
