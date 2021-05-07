@@ -25,10 +25,15 @@ class User < ApplicationRecord
   
   
   attachment :profile_image, destroy: false
-
+  
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
   validates :introduction, length: {maximum:50}
-  
+  validates :postal_code, presence: true
+  validates :prefecture_code, presence: true
+  validates :city, presence: true 
+  validates :street, presence: true 
+
+
    def followed_by?(user)
     # 今自分(引数のuser)がフォローしようとしているユーザー(レシーバー)がフォローされているユーザー(つまりpassive)の中から、引数に渡されたユーザー(自分)がいるかどうかを調べる
     passive_relationships.find_by(following_id: user.id).present?
@@ -61,6 +66,7 @@ class User < ApplicationRecord
   end
   
   # # ユーザーをフォローする
+  
   # def follow(user_id)
   #   follower.create(follower_id: user_id)
   # end 
