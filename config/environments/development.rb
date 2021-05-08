@@ -60,16 +60,28 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
   
-  config.action_mailer.deliverymethod = :smtp
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     port: 587,
     address: 'smtp.gmail.com',
-    domain: 'gmail.com',
-    user_name: 'yusuke410041@gmail.com',
-    password: 'gymlgfjednnfvpmc',
-    authentication: 'login',
+    domain: 'smtp.gmail.com',
+    user_name: ENV['WELCOME_MAILER_ADDRESS'],
+    password: ENV['WELCOME_MAILER_PASSWORD'],
+    authentication:       'login',
     enable_starttls_auto: true
   }
+  
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   port:                 587,
+  #   address:              'smtp.gmail.com',
+  #   domain:               'smtp.gmail.com',
+  #   user_name:            '送信元となるGmailアドレスを記入',
+  #   password:             'STEP2で取得するアプリパスワードを記入',
+  #   authentication:       'login',
+  #   enable_starttls_auto: true
+  # }
+# end
   
   
 end
