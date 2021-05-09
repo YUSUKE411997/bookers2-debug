@@ -6,6 +6,7 @@ class WelcomeMailer < ApplicationMailer
   #   en.welcome_mailer.send_when_signup.subject
   #
   def send_when_signup(email, name)
+    
     # @greeting = "Hi"
     
     @name = name

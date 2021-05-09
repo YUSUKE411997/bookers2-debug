@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  
   devise_for :users, controllers: {
   registrations: "users/registrations"
   }
@@ -20,10 +21,12 @@ Rails.application.routes.draw do
     resources :book_comments, only: [:create, :destroy]
   end 
   
+  get 'chat/:id' => 'chats#show', as: 'chat'
+  resources :chats, only: [:create]
+  # resources :chats, only: [:create, :show]
+  
   get "search" => "searches#search", as: :search
 
-  
-  
 end 
 
 
