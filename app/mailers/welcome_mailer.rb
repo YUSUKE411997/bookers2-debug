@@ -5,12 +5,13 @@ class WelcomeMailer < ApplicationMailer
   #
   #   en.welcome_mailer.send_when_signup.subject
   #
-  def send_when_signup(email, name)
+  def send_when_signup(user)
     
     # @greeting = "Hi"
     
-    @name = name
-    mail to: email, subject: 'ありがとう'
+    @name = user.name
+    mail to: user.email, subject: 'ありがとう'
+    
 
     # mail to: "to@example.org"
   end

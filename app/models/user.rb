@@ -7,11 +7,11 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
-  
+
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
   has_many :rooms, through: :user_rooms
-  
+
   # ====================自分がフォローしているユーザーとの関連 ===================================
   #フォローする側のUserから見て、フォローされる側のUserを(中間テーブルを介して)集める。なので親はfollowing_id(フォローする側)
   has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id, dependent: :destroy
@@ -25,23 +25,26 @@ class User < ApplicationRecord
   # 中間テーブルを介して「following」モデルのUser(フォローする側)を集めることを「followers」と定義
   has_many :followers, through: :passive_relationships, source: :following
   # =======================================================================================
-  
-  
+
+
   attachment :profile_image, destroy: false
-  
-  validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
+
+  validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true, presence: true
+  validates :email, presence: true
   validates :introduction, length: {maximum:50}
+
   # validates :postcode, presence: true
   # validates :prefecture_code, presence: true
-  # validates :address_city, presence: true 
-  # validates :address_street, presence: true 
+  # validates :address_city, presence: true
+  # validates :address_street, presence: true
   # validates :address_building, presence: true
 
    def followed_by?(user)
     # 今自分(引数のuser)がフォローしようとしているユーザー(レシーバー)がフォローされているユーザー(つまりpassive)の中から、引数に渡されたユーザー(自分)がいるかどうかを調べる
     passive_relationships.find_by(following_id: user.id).present?
-   end 
-   
+    
+   end
+
    # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
@@ -56,34 +59,34 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
-  
+
   include JpPrefecture
   jp_prefecture :prefecture_code
-  
+
   def prefecture_name
     JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
-  end 
-  
+  end
+
   def prefecture_name=(prefecture_name)
   self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
-  
+
   # # ユーザーをフォローする
-  
+
   # def follow(user_id)
   #   follower.create(follower_id: user_id)
-  # end 
-  
+  # end
+
   # # ユーザーのフォローを外す
   # def unfollow(user_id)
   #   follower.find_by(follower_id: user_id).destroy
-  # end 
-  
+  # end
+
   # #フォローしていれば true を返す
   # def following?(user)
   #   following_user.include?(user)
-  # end 
-  
+  # end
+
 end
 
 

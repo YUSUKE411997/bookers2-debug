@@ -73,3 +73,5 @@ gem 'jp_prefecture'
 
 
 gem 'dotenv-rails'
+
+gem 'whenever', require: false

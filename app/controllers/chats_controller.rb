@@ -17,8 +17,10 @@ class ChatsController < ApplicationController
       UserRoom.create(user_id: @user.id, room_id: @room.id)
       #@room.idとcurrent_user.idをUserRoomのカラムに保存(１レコード)
       UserRoom.create(user_id: current_user.id, room_id: @room.id)
+      # 上記で２つcreateしたが、chatする側とchatされる側の２つのレコードを作ってチャットしようとしてる同士、同じroomに入れるようにする。
+      
     else
-      #取得している場合は、user_roomsに紐づいているroomテーブルのレコードを@roomに代入
+      #取得している場合（元々チャットしていた場合）は、user_roomsに紐づいているroomテーブルのレコードを@roomに代入
       @room = user_rooms.room
     end
     
