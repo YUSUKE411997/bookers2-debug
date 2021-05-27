@@ -39,22 +39,18 @@
 
           </tr>
           </table>
-          <!--ここまで-->
 
-
-
-          <!--コメント一覧-->
           <div>
             <table id="comments_area">
               <%= render 'book_comments/comments', book:@book %>
             </table>
           </div>
-          <!--ここまで-->
 
 
-      <!--コメントフォーム-->
+
+
       <%= render 'book_comments/comment_form',book:@book, book_comment:@book_comment %>
-      <!--ここまで-->
+
 
 
 
